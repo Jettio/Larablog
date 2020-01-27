@@ -16,8 +16,11 @@ class CreateBlogPostsTable extends Migration
         Schema::create('blog_posts', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->string('category_id')->unsigned();
-            $table->string('title')->unsigned();
+            $table->integer('category_id')->unsigned();
+            $table->integer('tag_id')->unsigned();
+            $table->integer('user_id')->unsigned();
+
+            $table->string('title')->nullable();
 
             $table->text('excerpt')->nullable();
 
@@ -27,13 +30,13 @@ class CreateBlogPostsTable extends Migration
             $table->boolean('is_published')->default(false);
             $table->timestamp('published_at')->nullable();
 
-            $table->timestamps();
-            $table->softDeleted();
-
             $table->foreign('tag_id')->references('id')->on('blog_tags');
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('category_id')->references('id')->on('blog_categories');
             $table->index('is_published');
+
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 
