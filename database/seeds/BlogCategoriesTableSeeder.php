@@ -26,23 +26,8 @@ class BlogCategoriesTableSeeder extends Seeder
             ];
         }
 
-        $tags = [];
-
-        $cTags = 'Без тега';
-        $tags[] = [
-            'title' => $cTags
-        ];
-
-        for ($i = 1; $i <= 10; $i++) {
-            $cTags = 'Тэг №'.$i;
-
-            $tags[] = [
-                'title' => $cTags
-            ];
-        }
-
         DB::table('blog_categories')->insert($categories);
-        DB::table('blog_tags')->insert($tags);
+
     }
 
 }
